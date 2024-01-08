@@ -1,9 +1,6 @@
 //The raylib library must be installed to run raylib code
 #include "raylib.h"
 
-    //------------------------------------------------------------------------------------
-    // Program main entry point
-    //------------------------------------------------------------------------------------
     int main(void)
     {
         // Initialization
