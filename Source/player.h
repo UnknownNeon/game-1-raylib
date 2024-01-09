@@ -3,17 +3,13 @@
 #include <vector>
 
 class Player {
-
 public:
+
     Rectangle rect;
     float velocity = 250.0f;
     int score = 0;
     float w = 75.0f;
     float h = 10.0f;
-
-   // player():velocity(250.0f),score(0), w(75), h(10){}
-
-   
 
 };
 
@@ -33,4 +29,21 @@ public:
     Color color;
     float w = 50.0f;
     float h = 20.0f;
+};
+
+
+class Map {
+    
+    std::vector<Brick> bricks;
+    Player player;
+    Ball ball;
+    Brick aBrick;
+
+    void UpdateGame();
+
+public:
+    Map();
+    void makeBricks(int ,int );
+    void drawMap();
+    
 };
