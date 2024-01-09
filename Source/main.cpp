@@ -1,68 +1,12 @@
 //The raylib library must be installed to run raylib code
-#include <vector>
-#include <iostream>
-#include "raylib.h"
-
-void UpdateGame();
-void DrawGame();
-void gameStartup();
-
-struct Ball {
-    Vector2 pos;
-    Vector2 acceleration{ 1.0f, 1.0f };
-    float velocity;
-    float radius = 5.0f;
-};
-
-struct Brick {
-    Rectangle rect;
-    Color color;
-    float w = 50.0f;
-    float h = 20.0f;
-};
-
-struct Player {
-        Rectangle rect;
-        float velocity = 250.0f;
-        int score = 0;
-        float w = 75.0f;
-        float h = 10.0f;
-    }; // This is the struct for the player i,e the bar
-
+#include "player.h"
 
 Player player;
 Ball ball;
 
 std::vector<Brick> bricks;
 
-    int main(void)
-    {
-        const int screenWidth = 500;
-        const int screenHeight = 600;
-
-        InitWindow(screenWidth, screenHeight, "brick breaker game");
-        SetTargetFPS(60); 
-
-        gameStartup();
-
-        while (!WindowShouldClose())    // Detect window close button or ESC key
-        {
-            // Update
-            void UpdateGame();
-
-            // Draw
-            BeginDrawing();
-
-            ClearBackground(BLUE);
-            DrawGame();
-
-            EndDrawing();
-        }
-
-        CloseWindow();        
-
-        return 0;
-    }
+   
 
     void gameStartup() {
         
@@ -115,4 +59,34 @@ std::vector<Brick> bricks;
         }
 
         DrawCircle(ball.pos.x, ball.pos.y, ball.radius, RAYWHITE);
+    }
+
+
+    int main(void)
+    {
+        const int screenWidth = 500;
+        const int screenHeight = 600;
+
+        InitWindow(screenWidth, screenHeight, "brick breaker game");
+        SetTargetFPS(60);
+
+        gameStartup();
+
+        while (!WindowShouldClose())    // Detect window close button or ESC key
+        {
+            // Update
+            void UpdateGame();
+
+            // Draw
+            BeginDrawing();
+
+            ClearBackground(BLUE);
+            DrawGame();
+
+            EndDrawing();
+        }
+
+        CloseWindow();
+
+        return 0;
     }
