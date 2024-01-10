@@ -2,6 +2,10 @@
 #include <raylib.h>
 #include <vector>
 
+
+#define screenWidth 500
+#define screenHeight 600
+
 class Player {
 public:
 

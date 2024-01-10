@@ -5,10 +5,21 @@ void Map::UpdateGame()
     float frameTime = GetFrameTime();
 
     if (IsKeyDown(KEY_A)) {
-        player.rect.x += player.velocity * frameTime;
+        player.rect.x -= player.velocity * frameTime;
     }
     if (IsKeyDown(KEY_D)) {
-        player.rect.x -= player.velocity * frameTime;
+        player.rect.x += player.velocity * frameTime;
+    }
+
+    //updating ball position
+    ball.pos.x = ball.pos.x + ((ball.velocity * ball.acceleration.x) * frameTime);
+    ball.pos.y = ball.pos.y + ((ball.velocity * ball.acceleration.y) * frameTime);
+
+    if (ball.pos.x > screenWidth || ball.pos.x < 10) {
+        ball.acceleration.x = ball.acceleration.x * -1;
+    }
+    if (ball.pos.y > screenHeight || ball.pos.y < 10) {
+        ball.acceleration.y = ball.acceleration.y * -1;
     }
 }
 
@@ -59,7 +70,8 @@ void Map::drawMap()
     }
 
     DrawCircle(ball.pos.x, ball.pos.y, ball.radius, RAYWHITE);
-
+    DrawRectangle(player.rect.x, player.rect.y, player.rect.width, player.rect.height, YELLOW);
+ 
     EndDrawing();
 
 }
