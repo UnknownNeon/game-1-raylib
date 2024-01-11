@@ -1,6 +1,8 @@
 #pragma once
 #include <raylib.h>
 #include <vector>
+#include <iostream>
+#include <string>
 
 
 #define screenWidth 500
@@ -42,6 +44,7 @@ class Map {
     Player player;
     Ball ball;
     Brick aBrick;
+    std::string sscore;
 
     void UpdateGame();
 

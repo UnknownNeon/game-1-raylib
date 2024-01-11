@@ -1,5 +1,6 @@
 #include "player.h"
 
+
 void Map::UpdateGame()
 {
     float frameTime = GetFrameTime();
@@ -11,6 +12,15 @@ void Map::UpdateGame()
         player.rect.x += player.velocity * frameTime;
     }
 
+
+    if (player.rect.x > (screenWidth - player.rect.width)) {
+        player.rect.x = screenWidth - player.rect.width;
+    }
+    if (player.rect.x < 0) {
+        player.rect.x = 0;
+    }
+    //std::cout << "[Player.x Coordinate :]" << player.rect.x << std::endl;
+
     //updating ball position
     ball.pos.x = ball.pos.x + ((ball.velocity * ball.acceleration.x) * frameTime);
     ball.pos.y = ball.pos.y + ((ball.velocity * ball.acceleration.y) * frameTime);
@@ -21,10 +31,28 @@ void Map::UpdateGame()
     if (ball.pos.y > screenHeight || ball.pos.y < 10) {
         ball.acceleration.y = ball.acceleration.y * -1;
     }
+
+    Brick brick;
+    for (int i = 0; i < bricks.size(); i++) {
+        brick = bricks[i];
+        if (CheckCollisionCircleRec(ball.pos, ball.radius, brick.rect)) {
+            ball.acceleration.y *= -1;
+            bricks.erase(bricks.begin() + i);
+            player.score += 1;
+            break;
+        }
+    }
+
+    if (CheckCollisionCircleRec(ball.pos, ball.radius, player.rect)) {
+        ball.acceleration.y *= -1;
+    }
+
+     sscore = std::to_string(player.score);
 }
 
 Map::Map()
 {
+    sscore = "Start game";
 
     //Loading the player Presets
     player.rect = Rectangle{ 250.0f, 540.0f, player.w, player.h };
@@ -58,6 +86,9 @@ void Map::drawMap()
     BeginDrawing();
     ClearBackground(BLUE);
 
+    
+    DrawText(sscore.c_str(), 20, 20, 30, BLACK);
+    
     for (int i = 0; i < bricks.size(); i++) {
         this->aBrick = bricks[i];
         DrawRectangle(
