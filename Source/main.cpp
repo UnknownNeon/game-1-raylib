@@ -45,8 +45,10 @@
                 EndDrawing();
                 if ( IsGestureDetected(GESTURE_TAP))
                 {
+                    Map map1;
+                    map = map1;
+                    map.makeBricks(8, 8);
                     map.setScreen(game);
-
                 }
                 
                 break;
