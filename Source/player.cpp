@@ -1,6 +1,5 @@
 #include "player.h"
 
-
 void Map::UpdateGame()
 {
     float frameTime = GetFrameTime();
@@ -28,8 +27,11 @@ void Map::UpdateGame()
     if (ball.pos.x > screenWidth || ball.pos.x < 10) {
         ball.acceleration.x = ball.acceleration.x * -1;
     }
-    if (ball.pos.y > screenHeight || ball.pos.y < 10) {
+    if ( ball.pos.y < 10) {
         ball.acceleration.y = ball.acceleration.y * -1;
+    }
+    if (ball.pos.y > screenHeight) {
+        this->sc = end;
     }
 
     Brick brick;
@@ -50,6 +52,12 @@ void Map::UpdateGame()
      sscore = std::to_string(player.score);
 }
 
+
+void Map::setScreen(screens src)
+{
+    this->sc = src;
+}
+
 Map::Map()
 {
     sscore = "Start game";
@@ -62,6 +70,11 @@ Map::Map()
     ball.pos = Vector2{ 300, 300 };
     ball.velocity = 300.0f;
 
+}
+
+screens Map::getScreen()
+{
+    return this->sc;
 }
 
 void Map::makeBricks(int row , int col)

@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include "mainmenu.h"
 
 
 #define screenWidth 500
@@ -39,7 +40,8 @@ public:
 
 
 class Map {
-    
+   
+    screens sc;
     std::vector<Brick> bricks;
     Player player;
     Ball ball;
@@ -49,6 +51,9 @@ class Map {
     void UpdateGame();
 
 public:
+
+    void setScreen(screens src);
+    screens getScreen();
     Map();
     void makeBricks(int ,int );
     void drawMap();
